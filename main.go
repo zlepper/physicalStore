@@ -50,4 +50,14 @@ func main() {
 
 	//postGroup := apiGroup.Group("/posts", authResult.AuthMiddleware)
 
+	e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
+		Skipper: middleware.DefaultSkipper,
+		Root:    "./public",
+		Index:   "index.html",
+		HTML5:   true,
+	}))
+
+	e.Logger.Print(e.Start(":8080"))
+
+	dataStore.save()
 }
