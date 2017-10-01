@@ -1,8 +1,11 @@
 <div class="lists" fxLayout="row" fxLayoutAlign="space-around start" fxLayoutWrap>
-  <md-card *ngFor="let list of lists|async" fxFlex="32%" fxFlex.xs="98%" fxFlex.sm="49%">
+  <a class="link" *ngFor="let list of lists|async" fxFlex="32%" fxFlex.xs="98%" fxFlex.sm="49%"
+     [routerLink]="['/lists', list.id]">
+    <md-card>
     {{list.name}}
   </md-card>
-  <md-card (click)="createNewList()" fxFlex="32%" fxFlex.xs="98%" fxFlex.sm="49%">
+  </a>
+  <md-card class="link clickable" (click)="createNewList()" fxFlex="32%" fxFlex.xs="98%" fxFlex.sm="49%">
     Add new
   </md-card>
 </div>

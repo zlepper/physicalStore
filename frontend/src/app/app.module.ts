@@ -6,6 +6,7 @@ import {
   MdCardModule,
   MdCheckboxModule,
   MdDialogModule,
+  MdExpansionModule,
   MdInputModule,
   MdProgressSpinnerModule,
   MdToolbarModule,
@@ -17,6 +18,11 @@ import {AppComponent} from './app.component';
 import {routes} from './app.routing';
 import {CreateNewListComponent} from './lists/create-new-list/create-new-list.component';
 import {ListsComponent} from './lists/lists.component';
+import {CreateNewPostComponent} from './lists/open-list/create-new-post/create-new-post.component';
+import {OpenListComponent} from './lists/open-list/open-list.component';
+import {EditPostComponent} from './lists/open-list/post/edit-post/edit-post.component';
+import {PostRemoveConfirmComponent} from './lists/open-list/post/post-remove-confirm/post-remove-confirm.component';
+import {PostComponent} from './lists/open-list/post/post.component';
 import {LoginComponent} from './login/login.component';
 import {ServicesModule} from './services/services.module';
 
@@ -26,6 +32,11 @@ import {ServicesModule} from './services/services.module';
     LoginComponent,
     ListsComponent,
     CreateNewListComponent,
+    OpenListComponent,
+    CreateNewPostComponent,
+    PostComponent,
+    PostRemoveConfirmComponent,
+    EditPostComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +48,7 @@ import {ServicesModule} from './services/services.module';
     MdProgressSpinnerModule,
     MdCardModule,
     MdDialogModule,
+    MdExpansionModule,
     routes,
     BrowserAnimationsModule,
     ServicesModule,
@@ -46,6 +58,7 @@ import {ServicesModule} from './services/services.module';
   bootstrap: [AppComponent],
   entryComponents: [
     CreateNewListComponent,
+    PostRemoveConfirmComponent,
   ],
 })
 export class AppModule { }

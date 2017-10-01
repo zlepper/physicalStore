@@ -1,0 +1,23 @@
+<md-expansion-panel>
+  <md-expansion-panel-header>
+    <md-panel-title>
+      Create new post
+    </md-panel-title>
+    <md-panel-description>
+      Use this panel to create new posts
+    </md-panel-description>
+  </md-expansion-panel-header>
+
+  <form name="new-post-form" id="new-post-form" (submit)="createPost()">
+    <md-form-field>
+      <input mdInput type="text" required [(ngModel)]="name" name="name-input-field" #nameInputField="ngModel"
+             placeholder="Name">
+      <md-error *ngIf="nameInputField.hasError('required')">Name is required</md-error>
+    </md-form-field>
+  </form>
+
+  <md-action-row>
+    <button md-button color="warn" type="reset" form="new-post-form">Reset</button>
+    <button md-button color="primary" type="submit" form="new-post-form">Create</button>
+  </md-action-row>
+</md-expansion-panel>

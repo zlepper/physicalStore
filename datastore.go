@@ -56,8 +56,7 @@ type PostList struct {
 	// The id of the list
 	Id string `json:"id"`
 	// All the posts made on this list
-	Posts     []Post `json:"posts"`
-	postsLock sync.RWMutex
+	Posts []Post `json:"posts"`
 	// The name of the list
 	Name string `json:"name"`
 	// The username of the owner of this post
@@ -65,7 +64,15 @@ type PostList struct {
 }
 
 // Checks if the given user can actually access the list
-func (pl PostList) IsAccessor(accessor string) bool {
+func (pl *PostList) IsAccessor(accessor string) bool {
+	if pl.Owner == accessor {
+		return true
+	}
+
+	return false
+}
+
+func (pl *PostList) IsEditor(accessor string) bool {
 	if pl.Owner == accessor {
 		return true
 	}
@@ -177,7 +184,7 @@ func (store *DataStore) RemoveToken(token string) error {
 		}
 	}
 
-	store.ResetTokens = append(store.ResetTokens[:targetIndex], store.ResetTokens[targetIndex:]...)
+	store.ResetTokens = append(store.ResetTokens[:targetIndex], store.ResetTokens[targetIndex+1:]...)
 
 	return nil
 }
@@ -339,4 +346,84 @@ func (store *DataStore) UpdateList(list PostList) error {
 	}
 
 	return nil
+}
+
+func (store *DataStore) CreatePost(name, listId, owner string) (Post, error) {
+	post := Post{
+		Name:        name,
+		Creator:     owner,
+		Id:          generateId(),
+		Attachments: make([]Attachment, 0),
+	}
+
+	store.postListsLock.Lock()
+	defer store.postListsLock.Unlock()
+
+	for index, postList := range store.PostLists {
+		if postList.Id == listId {
+			if !postList.IsEditor(owner) {
+				return Post{}, errors.New("user is not editor of list")
+			}
+
+			postList.Posts = append(postList.Posts, post)
+			store.PostLists[index] = postList
+
+			return post, nil
+		}
+	}
+
+	return Post{}, errors.New("list not found")
+}
+
+func (store *DataStore) DeletePost(postId, listId, accessor string) error {
+	store.postListsLock.Lock()
+	defer store.postListsLock.Unlock()
+
+	for postListIndex, postList := range store.PostLists {
+		if postList.Id == listId {
+			if !postList.IsEditor(accessor) {
+				return errors.New("user is not editor of list")
+			}
+
+			for postIndex, post := range postList.Posts {
+				if post.Id == postId {
+					println("found post")
+					postList.Posts = append(postList.Posts[:postIndex], postList.Posts[postIndex+1:]...)
+					break
+				}
+			}
+
+			store.PostLists[postListIndex] = postList
+
+			return nil
+		}
+	}
+
+	return errors.New("list not found")
+}
+
+func (store *DataStore) UpdatePost(post Post, listId, updator string) error {
+	store.postListsLock.Lock()
+	defer store.postListsLock.Unlock()
+
+	for postListIndex, postList := range store.PostLists {
+		if postList.Id == listId {
+			if !postList.IsEditor(updator) {
+				return errors.New("user is not editor of list")
+			}
+
+			for postIndex, existingPost := range postList.Posts {
+				if existingPost.Id == post.Id {
+					postList.Posts[postIndex] = post
+					store.PostLists[postListIndex] = postList
+
+					return nil
+				}
+			}
+
+			return ErrNotFound
+		}
+	}
+
+	return ErrNotFound
 }

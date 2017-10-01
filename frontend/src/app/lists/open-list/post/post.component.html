@@ -1,0 +1,22 @@
+<md-expansion-panel>
+  <md-expansion-panel-header>
+    <md-panel-title>
+      {{post.name}}
+    </md-panel-title>
+  </md-expansion-panel-header>
+
+  <app-edit-post [original]="post" (save)="triggerSavePost($event)"
+                 *ngIf="editingPost; else postContent"></app-edit-post>
+
+  <ng-template #postContent>
+    Opened post
+  </ng-template>
+
+
+  <md-action-row>
+    <button md-button color="warn" type="button" (click)="removePost()">Delete</button>
+    <button md-button color="primary" type="button" (click)="editPost()" *ngIf="!editingPost">Edit</button>
+    <button md-button type="button" (click)="cancelEdit()" *ngIf="editingPost">Cancel edit</button>
+  </md-action-row>
+</md-expansion-panel>
+

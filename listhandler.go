@@ -61,6 +61,7 @@ func (l *ListHandler) CreateList(c echo.Context) error {
 	list := PostList{
 		Name:  request.Name,
 		Owner: subject.Username,
+		Posts: make([]Post, 0),
 	}
 
 	list, err = l.store.AddList(list)

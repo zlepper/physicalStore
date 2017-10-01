@@ -48,7 +48,9 @@ func main() {
 
 	BindListHandler(listGroup, dataStore)
 
-	//postGroup := apiGroup.Group("/posts", authResult.AuthMiddleware)
+	postGroup := listGroup.Group("/:listId/posts", authResult.AuthMiddleware)
+
+	BindPostHandler(postGroup, dataStore)
 
 	e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
 		Skipper: middleware.DefaultSkipper,
