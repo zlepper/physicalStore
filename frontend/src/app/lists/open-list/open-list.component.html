@@ -1,6 +1,17 @@
 <div class="content">
   <app-create-new-post (newPost)="createNewPost($event)"></app-create-new-post>
+  <md-card *ngIf="(posts|async)?.length > 0">
+    <md-card-content>
+      <form name="searchForm">
+        <md-form-field>
+          <input mdInput type="search" name="search-input" #searchInput [formControl]="searchField"
+                 placeholder="Search">
+        </md-form-field>
+      </form>
+    </md-card-content>
+  </md-card>
 
   <app-post *ngFor="let post of posts|async" [post]="post" (deletePost)="deletePost(post)"
-            (savePost)="savePost($event)"></app-post>
+            (savePost)="savePost($event)" (upload)="uploadFilesToPost($event, post)"
+            [listId]="listId|async"></app-post>
 </div>

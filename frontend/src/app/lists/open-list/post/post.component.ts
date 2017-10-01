@@ -12,11 +12,15 @@ export class PostComponent implements OnInit {
 
   @Input()
   public post: IPost;
+  @Input()
+  public listId: string;
 
   @Output()
-  public deletePost: EventEmitter<void> = new EventEmitter<void>();
+  public deletePost = new EventEmitter<void>();
   @Output()
-  public savePost: EventEmitter<IPost> = new EventEmitter<IPost>();
+  public savePost = new EventEmitter<IPost>();
+  @Output()
+  public upload = new EventEmitter<File[]>();
 
   public editingPost = false;
 
@@ -51,5 +55,9 @@ export class PostComponent implements OnInit {
       this.post = post;
       this.cancelEdit();
     }
+  }
+
+  public uploadFiles(files: File[]) {
+    this.upload.emit(files);
   }
 }

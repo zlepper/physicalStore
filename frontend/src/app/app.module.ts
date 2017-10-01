@@ -1,12 +1,13 @@
 import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   MdButtonModule,
   MdCardModule,
   MdCheckboxModule,
   MdDialogModule,
   MdExpansionModule,
+  MdIconModule,
   MdInputModule,
   MdProgressSpinnerModule,
   MdToolbarModule,
@@ -23,6 +24,7 @@ import {OpenListComponent} from './lists/open-list/open-list.component';
 import {EditPostComponent} from './lists/open-list/post/edit-post/edit-post.component';
 import {PostRemoveConfirmComponent} from './lists/open-list/post/post-remove-confirm/post-remove-confirm.component';
 import {PostComponent} from './lists/open-list/post/post.component';
+import {UploadAreaComponent} from './lists/open-list/upload-area/upload-area.component';
 import {LoginComponent} from './login/login.component';
 import {ServicesModule} from './services/services.module';
 
@@ -37,6 +39,7 @@ import {ServicesModule} from './services/services.module';
     PostComponent,
     PostRemoveConfirmComponent,
     EditPostComponent,
+    UploadAreaComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,10 +52,12 @@ import {ServicesModule} from './services/services.module';
     MdCardModule,
     MdDialogModule,
     MdExpansionModule,
+    MdIconModule,
     routes,
     BrowserAnimationsModule,
     ServicesModule,
     FlexLayoutModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -61,4 +66,5 @@ import {ServicesModule} from './services/services.module';
     PostRemoveConfirmComponent,
   ],
 })
-export class AppModule { }
+export class AppModule {
+}

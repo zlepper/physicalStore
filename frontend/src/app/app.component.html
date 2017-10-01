@@ -1,6 +1,6 @@
 <div fxLayout="column" class="container">
   <md-toolbar>
-    Object Storage
+    <a [routerLink]="['lists']">Object Storage</a>
     <span fxFlex></span>
     <button md-button (click)="logout()" *ngIf="authenticated|async">Logout</button>
   </md-toolbar>

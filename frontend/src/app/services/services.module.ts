@@ -6,6 +6,7 @@ import {IsAuthenticatedGuard} from './is-authenticated.guard';
 import {ListsService} from './lists.service';
 import {LocalStorageService} from './local-storage.service';
 import {LogPipe} from './log.pipe';
+import {UploadService} from './upload.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import {LogPipe} from './log.pipe';
     IsAuthenticatedGuard,
     LocalStorageService,
     ListsService,
+    UploadService,
   ],
   exports: [
     LogPipe,

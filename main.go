@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/zlepper/go-usermagement/echosupport"
@@ -12,6 +11,7 @@ import (
 const (
 	dataDir       = "data/"
 	dataStoreFile = dataDir + "datastore"
+	attachmentDir = dataDir + "attachments/"
 )
 
 type JsonError struct {
@@ -20,7 +20,7 @@ type JsonError struct {
 
 func main() {
 
-	os.MkdirAll(fmt.Sprintf("%s/attachments", dataDir), os.ModePerm)
+	os.MkdirAll(attachmentDir, os.ModePerm)
 
 	dataStore, err := NewDataStore(dataStoreFile)
 	if err != nil {
@@ -44,6 +44,7 @@ func main() {
 
 	authResult, err := echosupport.GetUserManagementRouter(authGroup, authHandler)
 
+	// http://localhost:8080/api/lists21aaaf80416b4152ab07076f041e329f/posts/d103ad9bceb94871b38e8b1627ab8eb4/attachments/5534ffb0bfc34d4ba8fa8d25cfc08f64/file?thumbnail=yes
 	listGroup := apiGroup.Group("/lists", authResult.AuthMiddleware)
 
 	BindListHandler(listGroup, dataStore)
@@ -51,6 +52,10 @@ func main() {
 	postGroup := listGroup.Group("/:listId/posts", authResult.AuthMiddleware)
 
 	BindPostHandler(postGroup, dataStore)
+
+	attachmentGroup := e.Group("/api/lists/:listId/posts/:postId/attachments")
+
+	BindAttachmentHandler(attachmentGroup, dataStore)
 
 	e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
 		Skipper: middleware.DefaultSkipper,

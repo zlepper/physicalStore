@@ -1,22 +1,40 @@
-<md-expansion-panel>
-  <md-expansion-panel-header>
-    <md-panel-title>
-      {{post.name}}
-    </md-panel-title>
-  </md-expansion-panel-header>
+<md-card class="container">
+  <md-card-header>
+    <h2 md-card-title>{{post.name}}</h2>
+  </md-card-header>
 
   <app-edit-post [original]="post" (save)="triggerSavePost($event)"
                  *ngIf="editingPost; else postContent"></app-edit-post>
 
   <ng-template #postContent>
-    Opened post
+    <div>
+      <h3>Attached files</h3>
+      <div fxLayout="row" fxLayoutWrap fxLayoutGap="1rem" fxLayoutAlign="space-between center" fxLayout.xs="column">
+        <div *ngFor="let attachment of post.attachments" fxFlex.gt-xs="200px">
+          <a [href]="'/api/lists/' + listId + '/posts/' + post.id + '/attachments/' + attachment.id + '/file'"
+             download fxLayout="row">
+            <img
+              [src]="'/api/lists/' + listId + '/posts/' + post.id + '/attachments/' + attachment.id + '/file?thumbnail=yes'"
+              *ngIf="attachment.isImage; else imageAlt"/>
+            <ng-template #imageAlt>
+              <md-card fxLayout="row" fxLayoutAlign="center center">
+                <md-icon>file_download</md-icon>
+              </md-card>
+            </ng-template>
+          </a>
+        </div>
+
+
+        <app-upload-area (upload)="uploadFiles($event)" fxFlex.gt-xs="200px"></app-upload-area>
+      </div>
+    </div>
   </ng-template>
 
 
-  <md-action-row>
+  <md-card-actions>
     <button md-button color="warn" type="button" (click)="removePost()">Delete</button>
     <button md-button color="primary" type="button" (click)="editPost()" *ngIf="!editingPost">Edit</button>
     <button md-button type="button" (click)="cancelEdit()" *ngIf="editingPost">Cancel edit</button>
-  </md-action-row>
-</md-expansion-panel>
+  </md-card-actions>
+</md-card>
 

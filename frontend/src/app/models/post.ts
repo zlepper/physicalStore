@@ -1,3 +1,5 @@
+import {UploadTask} from '../services/upload.service';
+
 export interface IPost {
   id: string;
   name: string;
@@ -10,4 +12,8 @@ export interface IAttachment {
   filename: string;
   isImage: boolean;
   uploader: string;
+}
+
+export interface IUploadablePost extends IPost {
+  uploadTasks: UploadTask[];
 }

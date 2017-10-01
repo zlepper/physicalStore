@@ -240,7 +240,10 @@ func NewDataStore(fromFile string) (*DataStore, error) {
 	}
 
 	ds := &DataStore{
-		sourceFile: fromFile,
+		sourceFile:  fromFile,
+		PostLists:   make([]PostList, 0),
+		ResetTokens: make([]ResetToken, 0),
+		Users:       make([]User, 0),
 	}
 
 	file, err := os.Open(fromFile)
@@ -426,4 +429,59 @@ func (store *DataStore) UpdatePost(post Post, listId, updator string) error {
 	}
 
 	return ErrNotFound
+}
+
+func (store *DataStore) CreateAttachment(postId, listId, uploader, fileName string, isImage bool) (Attachment, error) {
+	attachment := Attachment{
+		Id:       generateId(),
+		Filename: fileName,
+		Uploader: uploader,
+		IsImage:  isImage,
+	}
+
+	store.postListsLock.Lock()
+	defer store.postListsLock.Unlock()
+
+	for postListIndex, postList := range store.PostLists {
+		if postList.Id == listId {
+			if !postList.IsEditor(uploader) {
+				return Attachment{}, errors.New("user is not editor of list")
+			}
+
+			for postIndex, post := range postList.Posts {
+				if post.Id == postId {
+					post.Attachments = append(post.Attachments, attachment)
+
+					postList.Posts[postIndex] = post
+
+					store.PostLists[postListIndex] = postList
+
+					return attachment, nil
+				}
+			}
+		}
+	}
+
+	return Attachment{}, ErrNotFound
+}
+
+func (store *DataStore) GetAttachment(postId, listId, attachmentId string) (Attachment, error) {
+	store.postListsLock.RLock()
+	defer store.postListsLock.RUnlock()
+
+	for _, postList := range store.PostLists {
+		if postList.Id == listId {
+			for _, post := range postList.Posts {
+				if post.Id == postId {
+					for _, attachment := range post.Attachments {
+						if attachment.Id == attachmentId {
+							return attachment, nil
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return Attachment{}, ErrNotFound
 }
