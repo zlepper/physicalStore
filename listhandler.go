@@ -72,7 +72,7 @@ func (l *ListHandler) CreateList(c echo.Context) error {
 }
 
 func (l *ListHandler) GetAllLists(c echo.Context) error {
-	subject, ok := c.Get("user").(SubjectData)
+	subject, ok := c.Get("user").(*SubjectData)
 	if !ok {
 		return c.JSON(http.StatusInternalServerError, JsonError{"ERR: [GetAllList] could not convert user data to subject"})
 	}
@@ -91,7 +91,7 @@ func (l *ListHandler) GetAllLists(c echo.Context) error {
 }
 
 func (l *ListHandler) GetListContent(c echo.Context) error {
-	subject, ok := c.Get("user").(SubjectData)
+	subject, ok := c.Get("user").(*SubjectData)
 	if !ok {
 		return c.JSON(http.StatusInternalServerError, JsonError{"ERR: [GetListContent] could not convert user data to subject"})
 	}

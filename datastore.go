@@ -73,7 +73,6 @@ func (pl PostList) IsAccessor(accessor string) bool {
 	return false
 }
 
-
 // Stores the data for the application, as we don't have an actual DB
 type DataStore struct {
 	Users     []User `json:"users"`
@@ -204,14 +203,17 @@ func (store *DataStore) StartAutomaticSaving() {
 var physicalStoreDebug = os.Getenv("PHYSICAL_STORE_DEBUG")
 
 func (store *DataStore) save() {
-	file, err := os.OpenFile(store.sourceFile, os.O_WRONLY, os.ModePerm)
+	file, err := os.OpenFile(store.sourceFile, os.O_WRONLY|os.O_CREATE, os.ModePerm)
 	if err != nil {
 		log.Println("ERR when opening file for datastore save: ", err)
 		return
 	}
 
 	if physicalStoreDebug == "true" {
-		err := json.NewEncoder(file).Encode(store)
+		encoder := json.NewEncoder(file)
+		encoder.SetIndent("", "  ")
+
+		err := encoder.Encode(store)
 		if err != nil {
 			log.Println("ERR when encoding json to datastore file: ", err)
 		}
@@ -226,6 +228,10 @@ func (store *DataStore) save() {
 // Creates a new datastore from the given file
 // The file will also be updated as the datastore values changes
 func NewDataStore(fromFile string) (*DataStore, error) {
+	if physicalStoreDebug == "true" {
+		fromFile += ".json"
+	}
+
 	ds := &DataStore{
 		sourceFile: fromFile,
 	}

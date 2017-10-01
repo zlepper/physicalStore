@@ -142,3 +142,5 @@ typings/
 
 /dist/
 /public/
+/data/
+.idea/

@@ -1,0 +1,8 @@
+<div class="lists" fxLayout="row" fxLayoutAlign="space-around start" fxLayoutWrap>
+  <md-card *ngFor="let list of lists|async" fxFlex="32%" fxFlex.xs="98%" fxFlex.sm="49%">
+    {{list.name}}
+  </md-card>
+  <md-card (click)="createNewList()" fxFlex="32%" fxFlex.xs="98%" fxFlex.sm="49%">
+    Add new
+  </md-card>
+</div>

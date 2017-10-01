@@ -52,10 +52,12 @@ func main() {
 
 	e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
 		Skipper: middleware.DefaultSkipper,
-		Root:    "./public",
+		Root:    "./public/",
 		Index:   "index.html",
 		HTML5:   true,
 	}))
+
+	go dataStore.StartAutomaticSaving()
 
 	e.Logger.Print(e.Start(":8080"))
 

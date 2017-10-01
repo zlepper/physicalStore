@@ -1,10 +1,22 @@
-import {RouterModule, Routes} from "@angular/router";
-import {HomeComponent} from "./home/home.component";
+import {RouterModule, Routes} from '@angular/router';
+import {ListsComponent} from './lists/lists.component';
+import {LoginComponent} from './login/login.component';
+import {IsAuthenticatedGuard} from './services/is-authenticated.guard';
 
 const appRoutes: Routes = [
   {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'lists',
+    component: ListsComponent,
+    canActivate: [IsAuthenticatedGuard],
+  },
+  {
     path: '',
-    component: HomeComponent
+    redirectTo: 'lists',
+    pathMatch: 'full',
   }
 ];
 

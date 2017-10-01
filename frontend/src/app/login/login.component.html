@@ -1,0 +1,24 @@
+<form name="login-form" #loginForm fxLayout="column" fxLayoutAlign="center center" fxFlex (submit)="login()">
+  <div>
+    <md-form-field class="input-line">
+      <input mdInput placeholder="Email address" name="email-input" required type="email" #emailInput="ngModel"
+             [(ngModel)]="email" email="">
+      <md-error *ngIf="emailInput.hasError('required')">Email is required</md-error>
+    </md-form-field>
+    <span>{{emailInput|log}}</span>
+    <md-form-field class="input-line">
+      <input mdInput placeholder="Password" required name="password-input" type="password" #passwordInput="ngModel"
+             [(ngModel)]="password">
+      <md-error *ngIf="passwordInput.hasError('required')">You need to enter your password</md-error>
+    </md-form-field>
+    <md-checkbox class="input-line" #rememberMeInput [(ngModel)]="rememberMe" name="remember-me-input">
+      Remember me
+    </md-checkbox>
+    <md-error *ngIf="loginFailed">
+      Invalid email or password
+    </md-error>
+    <button md-raised-button color="primary" type="submit" class="login-button" [disabled]="authenticating">
+      {{authenticating ? 'Logging in...' : 'Login'}}
+    </button>
+  </div>
+</form>

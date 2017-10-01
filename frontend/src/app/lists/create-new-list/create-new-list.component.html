@@ -1,0 +1,15 @@
+<h1 md-dialog-title>Create new list</h1>
+<md-dialog-content>
+  <form #createNewListForm id="create-new-list-form" name="create-new-list-form" (submit)="createNewList()">
+    <md-form-field>
+      <input mdInput type="text" name="list-name-input" [(ngModel)]="name" #listNameInput="ngModel" required
+             placeholder="Name">
+      <md-error *ngIf="listNameInput.hasError('required')">Name is required</md-error>
+    </md-form-field>
+    <md-error *ngIf="error !== ''">{{error}}</md-error>
+  </form>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button md-dialog-close color="warn">Cancel</button>
+  <button md-button type="submit" color="primary" form="create-new-list-form">Create</button>
+</md-dialog-actions>

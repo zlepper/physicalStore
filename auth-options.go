@@ -1,12 +1,12 @@
 package main
 
 import (
-	"time"
-	"strings"
-	"errors"
 	"crypto/rand"
-	"os"
+	"errors"
 	"fmt"
+	"os"
+	"strings"
+	"time"
 )
 
 const resetMailDirectory = "reset-mails"
@@ -18,7 +18,7 @@ type SubjectData struct {
 // Gets a new instance of the auth handler
 func NewAuthHandler(dataStore *DataStore) *AuthHandler {
 	return &AuthHandler{
-		dataStore:dataStore,
+		dataStore: dataStore,
 	}
 }
 
@@ -36,8 +36,8 @@ func (*AuthHandler) ValidateUser(username, password string, data map[string]inte
 
 func (a *AuthHandler) CreateUser(username, password string, data map[string]interface{}) error {
 	user := User{
-		Username:username,
-		Password:password,
+		Username: username,
+		Password: password,
 	}
 
 	return a.dataStore.AddUser(user)
@@ -55,7 +55,7 @@ func (a *AuthHandler) GetPassword(username string) (password string, err error) 
 
 func (*AuthHandler) GetSubjectData(username string) (data interface{}, err error) {
 	return SubjectData{
-		Username:username,
+		Username: username,
 	}, nil
 }
 
@@ -68,6 +68,7 @@ func (a *AuthHandler) GetSigningSecret() (signingKey []byte, err error) {
 		if err != nil {
 			return signingKey, err
 		}
+		a.dataStore.SetSigningSecret(signingKey)
 	}
 
 	return signingKey, nil
@@ -163,5 +164,3 @@ func (a *AuthHandler) GetUsername(token string) (username string, err error) {
 func (*AuthHandler) GetNewDataCarrier() (template interface{}, err error) {
 	return &SubjectData{}, nil
 }
-
-
