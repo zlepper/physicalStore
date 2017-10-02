@@ -40,7 +40,7 @@ export class ListsService {
       .map(() => undefined);
   }
 
-  updatePost(post: IPost, listId: string): Observable<void> {
+  public updatePost(post: IPost, listId: string): Observable<void> {
     return this.auth.httpHeader
       .switchMap(headers => this.http.put(`/api/lists/${listId}/posts/${post.id}`, post, {headers}))
       .map(() => undefined);
