@@ -27,6 +27,8 @@ import {PostComponent} from './lists/open-list/post/post.component';
 import {UploadAreaComponent} from './lists/open-list/upload-area/upload-area.component';
 import {LoginComponent} from './login/login.component';
 import {ServicesModule} from './services/services.module';
+import {SignUpComponent} from './sign-up/sign-up.component';
+import {RepeatValidator} from "./sign-up/repeatValidator";
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import {ServicesModule} from './services/services.module';
     PostRemoveConfirmComponent,
     EditPostComponent,
     UploadAreaComponent,
+    SignUpComponent,
+    RepeatValidator,
   ],
   imports: [
     BrowserModule,

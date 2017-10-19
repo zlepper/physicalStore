@@ -1,0 +1,14 @@
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-line {
+  display: block;
+}
+
+.signup-button {
+  width: 100%;
+  margin-top: 1rem;
+}

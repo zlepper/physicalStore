@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/delay';
 import '../operators/delayAtLeast';
 import {AuthService} from '../services/auth.service';
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-login',
@@ -16,12 +17,13 @@ export class LoginComponent implements OnInit {
   public rememberMe = false;
   public authenticating = false;
   public loginFailed = false;
+  public loginArgs: Observable<any>;
 
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    console.log(this);
+    this.loginArgs = this.route.queryParams;
   }
 
 
@@ -31,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.email, this.password, rememberMe)
       .delayAtLeast(500)
       .subscribe(() => {
-        this.route.params.take(1)
+        this.route.queryParams.take(1)
           .subscribe(params => {
             const redirectLink = params.redirect || 'lists';
             this.router.navigate([redirectLink]);

@@ -1,4 +1,4 @@
-<form name="login-form" #loginForm fxLayout="column" fxLayoutAlign="center center" fxFlex (submit)="login()">
+<form name="signup-form" #loginForm fxLayout="column" fxLayoutAlign="center center" fxFlex (submit)="signup()">
   <div>
     <md-form-field class="input-line">
       <input mdInput placeholder="Email address" name="email-input" required type="email" #emailInput="ngModel"
@@ -7,21 +7,23 @@
     </md-form-field>
     <md-form-field class="input-line">
       <input mdInput placeholder="Password" required name="password-input" type="password" #passwordInput="ngModel"
-             [(ngModel)]="password">
+             [(ngModel)]="password" #passwordInputElement>
       <md-error *ngIf="passwordInput.hasError('required')">You need to enter your password</md-error>
+    </md-form-field>
+    <md-form-field class="input-line">
+      <input mdInput placeholder="Repeat Password" required name="repeat-password-input" type="password"
+             #repeatPasswordInput="ngModel" [(ngModel)]="repeatPassword" repeat [other]="passwordInputElement">
     </md-form-field>
     <md-checkbox class="input-line" #rememberMeInput [(ngModel)]="rememberMe" name="remember-me-input">
       Remember me
     </md-checkbox>
-    <md-error *ngIf="loginFailed">
-      Invalid email or password
-    </md-error>
-    <button md-raised-button color="primary" type="submit" class="login-button" [disabled]="authenticating">
-      {{authenticating ? 'Logging in...' : 'Login'}}
-    </button>
-    <a md-raised-button colo="secondary" [routerLink]="['/signup']" class="login-button"
-       [queryParams]="loginArgs|async">
+    <md-error *ngIf="signupFailed">Signup failed</md-error>
+    <button md-raised-button color="primary" type="submit" class="signup-button">
       Sign up
+    </button>
+    <a md-raised-button color="secondary" [routerLink]="['/login']" [queryParams]="loginArgs|async"
+       class="signup-button">
+      Login
     </a>
   </div>
 </form>
