@@ -485,3 +485,17 @@ func (store *DataStore) GetAttachment(postId, listId, attachmentId string) (Atta
 
 	return Attachment{}, ErrNotFound
 }
+
+func (store *DataStore) DeleteList(listId string) error {
+	store.postListsLock.Lock()
+	defer store.postListsLock.Unlock()
+
+	for listIndex, list := range store.PostLists {
+		if list.Id == listId {
+			store.PostLists[listIndex] = store.PostLists[len(store.PostLists)-1]
+			store.PostLists = store.PostLists[:len(store.PostLists)-1]
+		}
+	}
+
+	return nil
+}

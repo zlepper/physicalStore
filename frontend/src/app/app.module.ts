@@ -19,6 +19,8 @@ import {AppComponent} from './app.component';
 import {routes} from './app.routing';
 import {CreateNewListComponent} from './lists/create-new-list/create-new-list.component';
 import {ListsComponent} from './lists/lists.component';
+import {ConfirmListDeleteComponent} from './lists/open-list/confirm-list-delete/confirm-list-delete.component';
+import {ValueMatchValidator} from './lists/open-list/confirm-list-delete/ValueValidator';
 import {CreateNewPostComponent} from './lists/open-list/create-new-post/create-new-post.component';
 import {OpenListComponent} from './lists/open-list/open-list.component';
 import {EditPostComponent} from './lists/open-list/post/edit-post/edit-post.component';
@@ -27,8 +29,8 @@ import {PostComponent} from './lists/open-list/post/post.component';
 import {UploadAreaComponent} from './lists/open-list/upload-area/upload-area.component';
 import {LoginComponent} from './login/login.component';
 import {ServicesModule} from './services/services.module';
+import {RepeatValidator} from './sign-up/repeatValidator';
 import {SignUpComponent} from './sign-up/sign-up.component';
-import {RepeatValidator} from "./sign-up/repeatValidator";
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import {RepeatValidator} from "./sign-up/repeatValidator";
     UploadAreaComponent,
     SignUpComponent,
     RepeatValidator,
+    ConfirmListDeleteComponent,
+    ValueMatchValidator,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +72,7 @@ import {RepeatValidator} from "./sign-up/repeatValidator";
   entryComponents: [
     CreateNewListComponent,
     PostRemoveConfirmComponent,
+    ConfirmListDeleteComponent,
   ],
 })
 export class AppModule {

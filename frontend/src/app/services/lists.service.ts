@@ -45,4 +45,15 @@ export class ListsService {
       .switchMap(headers => this.http.put(`/api/lists/${listId}/posts/${post.id}`, post, {headers}))
       .map(() => undefined);
   }
+
+  public deleteList(id: string): Observable<void> {
+    return this.auth.httpHeader
+      .switchMap(headers => this.http.delete(`/api/lists/${id}`, {headers, responseType: 'text'}))
+      .map(() => undefined);
+  }
+
+  public getList(id: string): Observable<IList> {
+    return this.auth.httpHeader
+      .switchMap(headers => this.http.get<IList>(`/api/lists/${id}`, {headers}));
+  }
 }

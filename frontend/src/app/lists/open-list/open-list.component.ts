@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {MdDialog} from '@angular/material';
+import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/combineLatest';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
@@ -8,6 +9,7 @@ import {IPost, IUploadablePost} from '../../models/post';
 import '../../operators/behaviorSubject';
 import {ListsService} from '../../services/lists.service';
 import {UploadService} from '../../services/upload.service';
+import {ConfirmListDeleteComponent} from './confirm-list-delete/confirm-list-delete.component';
 
 @Component({
   selector: 'app-open-list',
@@ -21,7 +23,11 @@ export class OpenListComponent implements OnInit {
   private listId: Observable<string>;
   public posts: Subject<IUploadablePost[]> = new Subject();
 
-  constructor(private route: ActivatedRoute, private listsService: ListsService, private uploadService: UploadService) {
+  constructor(private route: ActivatedRoute,
+              private listsService: ListsService,
+              private uploadService: UploadService,
+              private dialog: MdDialog,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -62,6 +68,17 @@ export class OpenListComponent implements OnInit {
   public uploadFilesToPost(files: File[], post: IPost) {
     this.listId.take(1)
       .subscribe(listId => files.forEach(file => this.uploadService.addFileToPost(post, file, listId)));
+  }
+
+  public deleteList() {
+    this.listId.take(1)
+      .switchMap(id => this.listsService.getList(id))
+      .switchMap(list => this.dialog.open(ConfirmListDeleteComponent, {data: list}).afterClosed())
+      .filter(result => !!result)
+      .switchMap(result => this.listsService.deleteList(result))
+      .subscribe(() => {
+        this.router.navigate(['/lists']);
+      });
   }
 
   private refresh() {

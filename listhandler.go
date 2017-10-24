@@ -12,6 +12,8 @@ type ListDataStore interface {
 	GetAllList(accessor string) (lists []PostList, err error)
 	// Gets the specific list
 	GetList(id string) (PostList, error)
+	// Deletes the specified list
+	DeleteList(id string) error
 }
 
 func BindListHandler(listGroup *echo.Group, store ListDataStore) error {
@@ -20,6 +22,7 @@ func BindListHandler(listGroup *echo.Group, store ListDataStore) error {
 	listGroup.GET("/", listHandler.GetAllLists)
 	listGroup.GET("/:listId", listHandler.GetListContent)
 	listGroup.POST("/", listHandler.CreateList)
+	listGroup.DELETE("/:listId", listHandler.DeleteList)
 
 	return nil
 }
@@ -115,4 +118,35 @@ func (l *ListHandler) GetListContent(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, list)
+}
+
+func (l *ListHandler) DeleteList(c echo.Context) error {
+	subject, ok := c.Get("user").(*SubjectData)
+	if !ok {
+		return c.JSON(http.StatusInternalServerError, JsonError{"ERR: [DeleteLists] could not convert user data to subject"})
+	}
+
+	listId := c.Param("listId")
+	if listId == "" {
+		return c.JSON(http.StatusBadRequest, JsonError{"ERR: [DeleteLists] listId was empty"})
+	}
+
+	list, err := l.store.GetList(listId)
+	if err != nil {
+		if err == ErrNotFound {
+			return c.NoContent(http.StatusOK)
+		}
+		return c.JSON(http.StatusInternalServerError, JsonError{"ERR: [DeleteList] could not get list:\n" + err.Error()})
+	}
+
+	if !list.IsEditor(subject.Username) {
+		return c.NoContent(http.StatusForbidden)
+	}
+
+	err = l.store.DeleteList(listId)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, JsonError{"ERR: [DeleteList] could not delete list:\n" + err.Error()})
+	}
+
+	return c.NoContent(http.StatusOK)
 }

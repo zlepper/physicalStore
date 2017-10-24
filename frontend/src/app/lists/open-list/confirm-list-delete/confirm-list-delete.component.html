@@ -1,0 +1,16 @@
+<h2 md-dialog-title>Confirm list deletion</h2>
+
+<md-dialog-content>
+  To delete the list, confirm by entering the name of the list '{{listName}}' here:
+  <form name="deleteForm" id="delete-form" (submit)="confirmDelete()">
+    <md-form-field>
+      <input mdInput type="text" [(ngModel)]="confirmListName" valueMatch [match]="listName" placeholder="List name"
+             name="confirm-name-input">
+    </md-form-field>
+  </form>
+</md-dialog-content>
+
+<md-dialog-actions>
+  <button md-button type="button" md-dialog-close>Cancel</button>
+  <button md-button type="submit" form="delete-form" color="warn">Confirm</button>
+</md-dialog-actions>
