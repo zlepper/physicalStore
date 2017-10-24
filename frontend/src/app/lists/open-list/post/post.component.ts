@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MdDialog} from '@angular/material';
-import {IPost} from '../../../models/post';
+import {IPost, IUploadablePost} from '../../../models/post';
 import {PostRemoveConfirmComponent} from './post-remove-confirm/post-remove-confirm.component';
 
 @Component({
@@ -11,7 +11,7 @@ import {PostRemoveConfirmComponent} from './post-remove-confirm/post-remove-conf
 export class PostComponent implements OnInit {
 
   @Input()
-  public post: IPost;
+  public post: IUploadablePost;
   @Input()
   public listId: string;
 
@@ -48,7 +48,7 @@ export class PostComponent implements OnInit {
     this.editingPost = false;
   }
 
-  public triggerSavePost(post: IPost) {
+  public triggerSavePost(post: IUploadablePost) {
     console.log('save triggered');
     if (post.creator == this.post.creator && post.id == this.post.id) {
       this.savePost.emit(post);
