@@ -16,16 +16,16 @@ import {UploadService} from '../../services/upload.service';
 })
 export class OpenListComponent implements OnInit {
 
-  public posts: Observable<IPost[]>;
+  public filteredPosts: Observable<IPost[]>;
   public searchField = new FormControl('');
   private listId: Observable<string>;
-  private _posts: Subject<IUploadablePost[]> = new Subject();
+  public posts: Subject<IUploadablePost[]> = new Subject();
 
   constructor(private route: ActivatedRoute, private listsService: ListsService, private uploadService: UploadService) {
   }
 
   ngOnInit() {
-    this.posts = this._posts
+    this.filteredPosts = this.posts
       .combineLatest(this.searchField.valueChanges.behaviorSubject(''))
       .map(([posts, searchText]) => posts.filter(post => post.name.toLowerCase().includes(searchText)))
       .map(posts => posts.reverse());
@@ -72,6 +72,6 @@ export class OpenListComponent implements OnInit {
         ...post,
         uploadTasks: uploadTasks.filter(task => task.post.id == post.id),
       })))
-      .subscribe(posts => this._posts.next(posts));
+      .subscribe(posts => this.posts.next(posts));
   }
 }
