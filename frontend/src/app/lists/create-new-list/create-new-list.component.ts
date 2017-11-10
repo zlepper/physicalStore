@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {ListsService} from '../../services/lists.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class CreateNewListComponent implements OnInit {
   public name = '';
   public error = '';
 
-  constructor(private dialogRef: MdDialogRef<CreateNewListComponent>, private listsService: ListsService) {
+  constructor(private dialogRef: MatDialogRef<CreateNewListComponent>, private listsService: ListsService) {
   }
 
   ngOnInit() {

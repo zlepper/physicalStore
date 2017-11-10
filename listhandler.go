@@ -14,6 +14,8 @@ type ListDataStore interface {
 	GetList(id string) (PostList, error)
 	// Deletes the specified list
 	DeleteList(id string) error
+	// Gets the specified user
+	GetUser(id string) (User, error)
 }
 
 func BindListHandler(listGroup *echo.Group, store ListDataStore) error {
@@ -23,6 +25,9 @@ func BindListHandler(listGroup *echo.Group, store ListDataStore) error {
 	listGroup.GET("/:listId", listHandler.GetListContent)
 	listGroup.POST("/", listHandler.CreateList)
 	listGroup.DELETE("/:listId", listHandler.DeleteList)
+
+	listGroup.GET("/:listId/editors", listHandler.GetEditors)
+	listGroup.GET("/:listId/accessors", listHandler.GetAccessors)
 
 	return nil
 }
@@ -62,9 +67,11 @@ func (l *ListHandler) CreateList(c echo.Context) error {
 	}
 
 	list := PostList{
-		Name:  request.Name,
-		Owner: subject.Username,
-		Posts: make([]Post, 0),
+		Name:     request.Name,
+		Owner:    subject.Username,
+		Posts:    make([]Post, 0),
+		Editors:  make([]string, 0),
+		Accessor: make([]string, 0),
 	}
 
 	list, err = l.store.AddList(list)
@@ -149,4 +156,70 @@ func (l *ListHandler) DeleteList(c echo.Context) error {
 	}
 
 	return c.NoContent(http.StatusOK)
+}
+func (l *ListHandler) GetEditors(c echo.Context) error {
+	subject, ok := c.Get("user").(*SubjectData)
+	if !ok {
+		return c.JSON(http.StatusInternalServerError, JsonError{"ERR [GetEditors] could not convert user data to subject"})
+	}
+
+	listId := c.Param("listId")
+	if listId == "" {
+		return c.JSON(http.StatusBadRequest, JsonError{"ERR: [GetEditors] listId was empty"})
+	}
+
+	list, err := l.store.GetList(listId)
+	if err != nil {
+		return c.JSON(http.StatusNotFound, JsonError{err.Error()})
+	}
+
+	if !list.IsEditor(subject.Username) {
+		return c.JSON(http.StatusForbidden, JsonError{"ERR: [GetEditors] not an editor"})
+	}
+
+	userIds := list.Editors
+
+	users := l.mapUserIdsToUsers(userIds)
+
+	return c.JSON(http.StatusOK, users)
+}
+
+func (l *ListHandler) GetAccessors(c echo.Context) error {
+	subject, ok := c.Get("user").(*SubjectData)
+	if !ok {
+		return c.JSON(http.StatusInternalServerError, JsonError{"ERR [GetAccessors] could not convert user data to subject"})
+	}
+
+	listId := c.Param("listId")
+	if listId == "" {
+		return c.JSON(http.StatusBadRequest, JsonError{"ERR: [GetAccessors] listId was empty"})
+	}
+
+	list, err := l.store.GetList(listId)
+	if err != nil {
+		return c.JSON(http.StatusNotFound, JsonError{err.Error()})
+	}
+
+	if !list.IsEditor(subject.Username) {
+		return c.JSON(http.StatusForbidden, JsonError{"ERR: [GetAccessors] not an editor"})
+	}
+
+	userIds := list.Accessor
+
+	users := l.mapUserIdsToUsers(userIds)
+
+	return c.JSON(http.StatusOK, users)
+}
+
+func (l *ListHandler) mapUserIdsToUsers(userIds []string) []UserResponse {
+	users := make([]UserResponse, len(userIds))
+	for index, id := range userIds {
+		user, err := l.store.GetUser(id)
+		users[index] = UserResponse{
+			Username: user.Username,
+			Name:     user.Name,
+			Exists:   err != nil,
+		}
+	}
+	return users
 }

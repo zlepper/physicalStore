@@ -1,5 +1,5 @@
-<md-card (drop)="uploadFiles($event)" (dragover)="$event.preventDefault()" class="clickable"
-         (click)="fileInput.click()">
-  <span fxLayout="row" fxLayoutAlign="space-between center"><span>Drag files here to upload, or click to upload</span> <md-icon>file_upload</md-icon></span>
+<mat-card (drop)="uploadFiles($event)" (dragover)="$event.preventDefault()" class="clickable"
+          (click)="fileInput.click()">
+  <span fxLayout="row" fxLayoutAlign="space-between center"><span>Drag files here to upload, or click to upload</span> <mat-icon>file_upload</mat-icon></span>
   <input type="file" multiple style="display: none" (change)="selectFiles(fileInput.files)" #fileInput>
-</md-card>
+</mat-card>

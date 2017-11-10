@@ -49,13 +49,17 @@ func main() {
 
 	BindListHandler(listGroup, dataStore)
 
-	postGroup := listGroup.Group("/:listId/posts", authResult.AuthMiddleware)
+	postGroup := listGroup.Group("/:listId/posts")
 
 	BindPostHandler(postGroup, dataStore)
 
 	attachmentGroup := e.Group("/api/lists/:listId/posts/:postId/attachments")
 
 	BindAttachmentHandler(attachmentGroup, dataStore)
+
+	userGroup := apiGroup.Group("/users", authResult.AuthMiddleware)
+
+	BindUserHandler(userGroup, dataStore)
 
 	e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
 		Skipper: middleware.DefaultSkipper,

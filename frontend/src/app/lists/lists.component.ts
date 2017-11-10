@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {Subject} from 'rxjs/Subject';
 import {IList} from '../models/list';
 import {ListsService} from '../services/lists.service';
@@ -14,7 +14,7 @@ export class ListsComponent implements OnInit {
 
   public lists: Subject<IList[]>;
 
-  constructor(private listsService: ListsService, private dialog: MdDialog) {
+  constructor(private listsService: ListsService, private dialog: MatDialog) {
   }
 
   ngOnInit() {

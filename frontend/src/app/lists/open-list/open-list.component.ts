@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/combineLatest';
 import {Observable} from 'rxjs/Observable';
@@ -10,6 +10,7 @@ import '../../operators/behaviorSubject';
 import {ListsService} from '../../services/lists.service';
 import {UploadService} from '../../services/upload.service';
 import {ConfirmListDeleteComponent} from './confirm-list-delete/confirm-list-delete.component';
+import {ShareEditComponent} from './share-edit/share-edit.component';
 
 @Component({
   selector: 'app-open-list',
@@ -26,7 +27,7 @@ export class OpenListComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private listsService: ListsService,
               private uploadService: UploadService,
-              private dialog: MdDialog,
+              private dialog: MatDialog,
               private router: Router) {
   }
 
@@ -79,6 +80,12 @@ export class OpenListComponent implements OnInit {
       .subscribe(() => {
         this.router.navigate(['/lists']);
       });
+  }
+
+  public openShareEditor() {
+    this.listId.take(1)
+      .switchMap(id => this.listsService.getList(id))
+      .subscribe(list => this.dialog.open(ShareEditComponent, {data: list}));
   }
 
   private refresh() {

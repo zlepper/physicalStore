@@ -62,11 +62,12 @@ export class AuthService {
     this.localStorage.remove(TOKEN_KEY);
   }
 
-  public signup(username: string, password: string, rememberMe: boolean): Observable<ILoginResponse> {
+  public signup(username: string, password: string, rememberMe: boolean, name: string): Observable<ILoginResponse> {
     return this.http.post<{}>('/api/auth/create', {
-      username, password
+      username, password,
+      data: {name},
     })
       .switchMap(() => this.httpHeader)
-      .switchMap(headers => this.login(username, password, rememberMe))
+      .switchMap(headers => this.login(username, password, rememberMe));
   }
 }

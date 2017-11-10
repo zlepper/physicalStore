@@ -2,15 +2,16 @@ import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
-  MdButtonModule,
-  MdCardModule,
-  MdCheckboxModule,
-  MdDialogModule,
-  MdExpansionModule,
-  MdIconModule,
-  MdInputModule,
-  MdProgressSpinnerModule,
-  MdToolbarModule,
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatInputModule,
+  MatProgressSpinnerModule,
+  MatToolbarModule,
 } from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -26,6 +27,7 @@ import {OpenListComponent} from './lists/open-list/open-list.component';
 import {EditPostComponent} from './lists/open-list/post/edit-post/edit-post.component';
 import {PostRemoveConfirmComponent} from './lists/open-list/post/post-remove-confirm/post-remove-confirm.component';
 import {PostComponent} from './lists/open-list/post/post.component';
+import {ShareEditComponent} from './lists/open-list/share-edit/share-edit.component';
 import {UploadAreaComponent} from './lists/open-list/upload-area/upload-area.component';
 import {LoginComponent} from './login/login.component';
 import {ServicesModule} from './services/services.module';
@@ -48,19 +50,21 @@ import {SignUpComponent} from './sign-up/sign-up.component';
     RepeatValidator,
     ConfirmListDeleteComponent,
     ValueMatchValidator,
+    ShareEditComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    MdToolbarModule,
-    MdInputModule,
-    MdCheckboxModule,
-    MdButtonModule,
-    MdProgressSpinnerModule,
-    MdCardModule,
-    MdDialogModule,
-    MdExpansionModule,
-    MdIconModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatChipsModule,
     routes,
     BrowserAnimationsModule,
     ServicesModule,
@@ -73,6 +77,7 @@ import {SignUpComponent} from './sign-up/sign-up.component';
     CreateNewListComponent,
     PostRemoveConfirmComponent,
     ConfirmListDeleteComponent,
+    ShareEditComponent,
   ],
 })
 export class AppModule {

@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {IList} from '../../../models/list';
 
 @Component({
@@ -12,7 +12,7 @@ export class ConfirmListDeleteComponent implements OnInit {
   public listName: string;
   public confirmListName: string;
 
-  constructor(@Inject(MD_DIALOG_DATA) private data: IList, private dialogRef: MdDialogRef<ConfirmListDeleteComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA) private data: IList, private dialogRef: MatDialogRef<ConfirmListDeleteComponent>) {
   }
 
   ngOnInit() {

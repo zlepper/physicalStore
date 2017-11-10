@@ -61,12 +61,23 @@ type PostList struct {
 	Name string `json:"name"`
 	// The username of the owner of this post
 	Owner string `json:"owner"`
+	// The username of the people who are editor on this list
+	Editors []string `json:"editors"`
+	// The username of the people who are accessors on this list
+	Accessor []string `json:"accessor"`
 }
 
 // Checks if the given user can actually access the list
 func (pl *PostList) IsAccessor(accessor string) bool {
-	if pl.Owner == accessor {
+	// All editors are also accessors
+	if pl.IsEditor(accessor) {
 		return true
+	}
+
+	for _, option := range pl.Accessor {
+		if option == accessor {
+			return true
+		}
 	}
 
 	return false
@@ -75,6 +86,12 @@ func (pl *PostList) IsAccessor(accessor string) bool {
 func (pl *PostList) IsEditor(accessor string) bool {
 	if pl.Owner == accessor {
 		return true
+	}
+
+	for _, option := range pl.Editors {
+		if option == accessor {
+			return true
+		}
 	}
 
 	return false

@@ -1,9 +1,9 @@
 <div fxLayout="column" class="container">
-  <md-toolbar>
+  <mat-toolbar>
     <a [routerLink]="['lists']">Object Storage</a>
     <span fxFlex></span>
-    <button md-button (click)="logout()" *ngIf="authenticated|async">Logout</button>
-  </md-toolbar>
+    <button mat-button (click)="logout()" *ngIf="authenticated|async">Logout</button>
+  </mat-toolbar>
   <div fxFlex fxLayout="column">
     <router-outlet></router-outlet>
   </div>

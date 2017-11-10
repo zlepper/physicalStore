@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {IPost} from '../../../../models/post';
 
 @Component({
@@ -9,7 +9,7 @@ import {IPost} from '../../../../models/post';
 })
 export class PostRemoveConfirmComponent implements OnInit {
 
-  constructor(private dialogRef: MdDialogRef<PostRemoveConfirmComponent>, @Inject(MD_DIALOG_DATA) public data: IPost) {
+  constructor(private dialogRef: MatDialogRef<PostRemoveConfirmComponent>, @Inject(MAT_DIALOG_DATA) public data: IPost) {
   }
 
   ngOnInit() {

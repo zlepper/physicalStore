@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {IPost, IUploadablePost} from '../../../models/post';
 import {PostRemoveConfirmComponent} from './post-remove-confirm/post-remove-confirm.component';
 
@@ -24,7 +24,7 @@ export class PostComponent implements OnInit {
 
   public editingPost = false;
 
-  constructor(private dialog: MdDialog) {
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit() {

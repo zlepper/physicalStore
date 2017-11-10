@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Edit sharing for {{listName}}</h1>
+
+<mat-dialog-content>
+  <p style="padding-bottom: 1rem">Here you can edit who can edit and see the currently selected list</p>
+  <form name="share-edit-form" id="share-edit-form">
+    <h3>Editors </h3>
+    <pre>{{editors|async|json}}</pre>
+    <mat-form-field style="width: 100%">
+      <mat-chip-list #editorChipList>
+        <mat-chip *ngFor="let editor of editors|async" [selectable]="true" [removable]="true"
+                  (remove)="removeEditor(editor)" [color]="editor.exists ? 'primary' : 'warn'">
+          {{editor.name}} ({{editor.username}})
+          <mat-icon mdChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+      <input [matChipInputFor]="editorChipList" name="editor-input-edit" placeholder="New editor"
+             [matChipInputAddOnBlur]="true" [matChipInputSeparatorKeyCodes]="[188, 186, 13, 32]"
+             (mdChipInputTokenEnd)="addEditor($event)">
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button type="submit" color="primary">Save</button>
+  <button mat-button type="button" color="warn">Cancel</button>
+</mat-dialog-actions>

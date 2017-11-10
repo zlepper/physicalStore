@@ -1,15 +1,15 @@
-<h1 md-dialog-title>Create new list</h1>
-<md-dialog-content>
+<h1 mat-dialog-title>Create new list</h1>
+<mat-dialog-content>
   <form #createNewListForm id="create-new-list-form" name="create-new-list-form" (submit)="createNewList()">
-    <md-form-field>
-      <input mdInput type="text" name="list-name-input" [(ngModel)]="name" #listNameInput="ngModel" required
+    <mat-form-field>
+      <input matInput type="text" name="list-name-input" [(ngModel)]="name" #listNameInput="ngModel" required
              placeholder="Name">
-      <md-error *ngIf="listNameInput.hasError('required')">Name is required</md-error>
-    </md-form-field>
-    <md-error *ngIf="error !== ''">{{error}}</md-error>
+      <mat-error *ngIf="listNameInput.hasError('required')">Name is required</mat-error>
+    </mat-form-field>
+    <mat-error *ngIf="error !== ''">{{error}}</mat-error>
   </form>
-</md-dialog-content>
-<md-dialog-actions>
-  <button md-button md-dialog-close color="warn">Cancel</button>
-  <button md-button type="submit" color="primary" form="create-new-list-form">Create</button>
-</md-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close color="warn">Cancel</button>
+  <button mat-button type="submit" color="primary" form="create-new-list-form">Create</button>
+</mat-dialog-actions>

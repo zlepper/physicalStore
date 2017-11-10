@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../services/auth.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,6 +15,7 @@ export class SignUpComponent implements OnInit {
   public password: string;
   public email: string;
   public rememberMe: boolean;
+  public name: string;
 
   public loginArgs: Observable<any>;
 
@@ -27,7 +28,7 @@ export class SignUpComponent implements OnInit {
 
   public signup() {
     if (this.repeatPassword === this.password) {
-      this.authService.signup(this.email, this.password, this.rememberMe)
+      this.authService.signup(this.email, this.password, this.rememberMe, this.name)
         .subscribe(() => {
           this.route.params.take(1)
             .subscribe(params => {

@@ -30,6 +30,10 @@ func (*AuthHandler) ValidateUser(username, password string, data map[string]inte
 	if !strings.Contains(username, "@") {
 		return errors.New("username is not an email")
 	}
+	name, ok := data["name"]
+	if !ok || strings.TrimSpace(name.(string)) == "" {
+		return errors.New("name not provided")
+	}
 
 	return nil
 }
@@ -38,6 +42,7 @@ func (a *AuthHandler) CreateUser(username, password string, data map[string]inte
 	user := User{
 		Username: username,
 		Password: password,
+		Name:     data["name"].(string),
 	}
 
 	return a.dataStore.AddUser(user)

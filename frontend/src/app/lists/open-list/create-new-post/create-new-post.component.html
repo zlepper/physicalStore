@@ -1,23 +1,24 @@
-<md-expansion-panel>
-  <md-expansion-panel-header>
-    <md-panel-title>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
       Create new post
-    </md-panel-title>
-    <md-panel-description>
+    </mat-panel-title>
+    <mat-panel-description>
       Use this panel to create new posts
-    </md-panel-description>
-  </md-expansion-panel-header>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
 
   <form name="new-post-form" id="new-post-form" (submit)="createPost()" fxLayout="row">
-    <md-form-field fxFlex fxLayout="row">
-      <textarea fxFlex mdInput type="text" required [(ngModel)]="name" name="name-input-field" #nameInputField="ngModel"
+    <mat-form-field fxFlex fxLayout="row">
+      <textarea fxFlex matInput type="text" required [(ngModel)]="name" name="name-input-field"
+                #nameInputField="ngModel"
                 placeholder="Name"></textarea>
-      <md-error *ngIf="nameInputField.hasError('required')">Name is required</md-error>
-    </md-form-field>
+      <mat-error *ngIf="nameInputField.hasError('required')">Name is required</mat-error>
+    </mat-form-field>
   </form>
 
-  <md-action-row>
-    <button md-button color="warn" type="reset" form="new-post-form">Reset</button>
-    <button md-button color="primary" type="submit" form="new-post-form">Create</button>
-  </md-action-row>
-</md-expansion-panel>
+  <mat-action-row>
+    <button mat-button color="warn" type="reset" form="new-post-form">Reset</button>
+    <button mat-button color="primary" type="submit" form="new-post-form">Create</button>
+  </mat-action-row>
+</mat-expansion-panel>

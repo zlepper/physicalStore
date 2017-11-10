@@ -1,7 +1,7 @@
-<md-card class="container">
-  <md-card-header>
-    <h2 md-card-title>{{post.name}}</h2>
-  </md-card-header>
+<mat-card class="container">
+  <mat-card-header>
+    <h2 mat-card-title>{{post.name}}</h2>
+  </mat-card-header>
 
   <app-edit-post [original]="post" (save)="triggerSavePost($event)"
                  *ngIf="editingPost; else postContent"></app-edit-post>
@@ -17,18 +17,18 @@
                  [src]="'/api/lists/' + listId + '/posts/' + post.id + '/attachments/' + attachment.id + '/file?thumbnail=yes'"
                  *ngIf="attachment.isImage; else imageAlt"/>
             <ng-template #imageAlt>
-              <md-card fxLayout="row" fxLayoutAlign="center center">
-                <md-icon>file_download</md-icon>
-              </md-card>
+              <mat-card fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon>file_download</mat-icon>
+              </mat-card>
             </ng-template>
           </a>
         </div>
 
         <ng-container *ngFor="let uploadTask of post.uploadTasks">
           <div fxFlex.gt-xs="200px" *ngIf="!(uploadTask.completed|async)">
-            <md-progress-spinner mode="determinate" [value]="uploadTask.uploadProgress|async">
+            <mat-progress-spinner mode="determinate" [value]="uploadTask.uploadProgress|async">
 
-            </md-progress-spinner>
+            </mat-progress-spinner>
           </div>
         </ng-container>
 
@@ -39,10 +39,10 @@
   </ng-template>
 
 
-  <md-card-actions>
-    <button md-button color="warn" type="button" (click)="removePost()">Delete</button>
-    <button md-button color="primary" type="button" (click)="editPost()" *ngIf="!editingPost">Edit</button>
-    <button md-button type="button" (click)="cancelEdit()" *ngIf="editingPost">Cancel edit</button>
-  </md-card-actions>
-</md-card>
+  <mat-card-actions>
+    <button mat-button color="warn" type="button" (click)="removePost()">Delete</button>
+    <button mat-button color="primary" type="button" (click)="editPost()" *ngIf="!editingPost">Edit</button>
+    <button mat-button type="button" (click)="cancelEdit()" *ngIf="editingPost">Cancel edit</button>
+  </mat-card-actions>
+</mat-card>
 
