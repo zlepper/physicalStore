@@ -3,7 +3,8 @@ import {ListsComponent} from './lists/lists.component';
 import {OpenListComponent} from './lists/open-list/open-list.component';
 import {LoginComponent} from './login/login.component';
 import {IsAuthenticatedGuard} from './services/is-authenticated.guard';
-import {SignUpComponent} from "./sign-up/sign-up.component";
+import {SettingsComponent} from './settings/settings.component';
+import {SignUpComponent} from './sign-up/sign-up.component';
 
 const appRoutes: Routes = [
   {
@@ -23,6 +24,10 @@ const appRoutes: Routes = [
     path: 'lists/:id',
     component: OpenListComponent,
     canActivate: [IsAuthenticatedGuard],
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
   },
   {
     path: '',

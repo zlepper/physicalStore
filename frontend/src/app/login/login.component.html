@@ -1,27 +1,34 @@
 <form name="login-form" #loginForm fxLayout="column" fxLayoutAlign="center center" fxFlex (submit)="login()">
   <div>
     <md-form-field class="input-line">
-      <input mdInput placeholder="Email address" name="email-input" required type="email" #emailInput="ngModel"
+      <input mdInput placeholder="{{'LOGIN.EMAIL.PLACEHOLDER'|translate}}" name="email-input" required type="email"
+             #emailInput="ngModel"
              [(ngModel)]="email" email="">
-      <md-error *ngIf="emailInput.hasError('required')">Email is required</md-error>
+      <md-error *ngIf="emailInput.hasError('required')">{{'LOGIN.EMAIL.REQUIRED'|translate}}</md-error>
     </md-form-field>
     <md-form-field class="input-line">
-      <input mdInput placeholder="Password" required name="password-input" type="password" #passwordInput="ngModel"
+      <input mdInput placeholder="{{'LOGIN.PASSWORD.PLACEHOLDER'|translate}}" required name="password-input"
+             type="password" #passwordInput="ngModel"
              [(ngModel)]="password">
-      <md-error *ngIf="passwordInput.hasError('required')">You need to enter your password</md-error>
+      <md-error *ngIf="passwordInput.hasError('required')">{{'LOGIN.PASSWORD.REQUIRED'|translate}}</md-error>
     </md-form-field>
     <md-checkbox class="input-line" #rememberMeInput [(ngModel)]="rememberMe" name="remember-me-input">
-      Remember me
+      {{'LOGIN.REMEMBER-ME'|translate}}
     </md-checkbox>
     <md-error *ngIf="loginFailed">
-      Invalid email or password
+      {{'LOGIN.INVALID-EMAIL-OR-PASSWORD'|translate}}
     </md-error>
     <button md-raised-button color="primary" type="submit" class="login-button" [disabled]="authenticating">
-      {{authenticating ? 'Logging in...' : 'Login'}}
+      <span *ngIf="authenticating; else waitingForLoginRequest">
+        {{'LOGIN.LOGGING-IN'|translate}}
+      </span>
+      <ng-template #waitingForLoginRequest>
+        {{'LOGIN.LOGIN'|translate}}
+      </ng-template>
     </button>
     <a md-raised-button colo="secondary" [routerLink]="['/signup']" class="login-button"
        [queryParams]="loginArgs|async">
-      Sign up
+      {{'LOGIN.SIGNUP'|translate}}
     </a>
   </div>
 </form>

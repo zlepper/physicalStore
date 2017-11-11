@@ -1,15 +1,16 @@
-<h1 md-dialog-title>Create new list</h1>
+<h1 md-dialog-title>{{'LISTS.CREATE.TITLE'|translate}}</h1>
 <md-dialog-content>
   <form #createNewListForm id="create-new-list-form" name="create-new-list-form" (submit)="createNewList()">
     <md-form-field>
       <input mdInput type="text" name="list-name-input" [(ngModel)]="name" #listNameInput="ngModel" required
-             placeholder="Name">
-      <md-error *ngIf="listNameInput.hasError('required')">Name is required</md-error>
+             placeholder="{{'LISTS.CREATE.NAME.PLACEHOLDER'|translate}}">
+      <md-error *ngIf="listNameInput.hasError('required')">{{'LISTS.CREATE.NAME.REQUIRED'|translate}}</md-error>
     </md-form-field>
     <md-error *ngIf="error !== ''">{{error}}</md-error>
   </form>
 </md-dialog-content>
 <md-dialog-actions>
-  <button md-button md-dialog-close color="warn">Cancel</button>
-  <button md-button type="submit" color="primary" form="create-new-list-form">Create</button>
+  <button md-button md-dialog-close color="warn">{{'LISTS.CREATE.CANCEL'|translate}}</button>
+  <button md-button type="submit" color="primary" form="create-new-list-form">{{'LISTS.CREATE.CREATE'|translate}}
+  </button>
 </md-dialog-actions>

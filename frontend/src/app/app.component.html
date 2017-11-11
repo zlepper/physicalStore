@@ -1,8 +1,11 @@
 <div fxLayout="column" class="container">
   <md-toolbar>
-    <a [routerLink]="['lists']">Object Storage</a>
+    <a [routerLink]="['lists']">Doku</a>
     <span fxFlex></span>
-    <button md-button (click)="logout()" *ngIf="authenticated|async">Logout</button>
+    <a md-icon-button [routerLink]="['settings']" attr.aria-label="{{'SETTINGS.LINK'|translate}}">
+      <md-icon aria-hidden="true">settings</md-icon>
+    </a>
+    <button md-button (click)="logout()" *ngIf="authenticated|async">{{'LOGOUT'|translate}}</button>
   </md-toolbar>
   <div fxFlex fxLayout="column">
     <router-outlet></router-outlet>

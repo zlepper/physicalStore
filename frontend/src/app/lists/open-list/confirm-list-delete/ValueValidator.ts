@@ -13,7 +13,8 @@ export class ValueMatchValidator implements Validator {
   public match: any;
 
   validate(c: AbstractControl): { [key: string]: any; } {
-    return c.value === this.match ? {} : {valueMatch: false};
+    console.log(this, c.value);
+    return c.value === this.match ? {} : {valueMatch: true};
   }
 
 

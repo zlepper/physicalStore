@@ -1,0 +1,96 @@
+{
+  "LISTS": {
+    "ADD_NEW": "Add new",
+    "CREATE": {
+      "CANCEL": "Cancel",
+      "CREATE": "Create",
+      "NAME": {
+        "PLACEHOLDER": "Name",
+        "REQUIRED": "Name is required"
+      },
+      "TITLE": "Create new list"
+    },
+    "DELETE": {
+      "BUTTON": "Delete",
+      "CANCEL": "Cancel",
+      "CONFIRM": {
+        "BUTTON": "Delete",
+        "TITLE": "Delete list"
+      },
+      "DELETE_INFO": "To delete the list, confirm by entering the name of the list '{{name}}' here",
+      "NAME": "List name",
+      "NAME-REQUIRED": "Name is required",
+      "NAMES-NO-MATCH": "List names do not match"
+    },
+    "SEARCH": "Search",
+    "SHARE": "Share"
+  },
+  "LOGIN": {
+    "EMAIL": {
+      "PLACEHOLDER": "Email address",
+      "REQUIRED": "Email address is required"
+    },
+    "INVALID-EMAIL-OR-PASSWORD": "Invalid email or password",
+    "LOGGING-IN": "Logging in...",
+    "LOGIN": "Login",
+    "PASSWORD": {
+      "PLACEHOLDER": "Password",
+      "REQUIRED": "Password is required"
+    },
+    "REMEMBER-ME": "Remember me",
+    "SIGNUP": "Sign up"
+  },
+  "LOGOUT": "Logout",
+  "POSTS": {
+    "ATTACHED-FILES": "Attached files",
+    "CANCEL-EDIT": "Cancel edit",
+    "CREATE": {
+      "CREATE": "Create",
+      "DESCRIPTION": "Use this panel to create new posts",
+      "NAME": {
+        "PLACEHOLDER": "Name",
+        "REQUIRED": "Name is required"
+      },
+      "RESET": "Reset",
+      "TITLE": "Create new post"
+    },
+    "DELETE": {
+      "BUTTON": "Delete",
+      "CANCEL": "Cancel",
+      "CONFIRM": "Confirm",
+      "CONFIRM-NAME": "Are you sure you want to delete the post",
+      "CONSEQUENCE": "Once the post has been deleted, there is no way to recover it."
+    },
+    "EDIT": {
+      "BUTTON": "Edit",
+      "NAME": {
+        "PLACEHOLDER": "Name",
+        "REQUIRED": "Name is required"
+      },
+      "RESET": "Reset changes",
+      "SAVE": "Save changes"
+    },
+    "UPLOAD": "Drag files here, or click to upload"
+  },
+  "SETTINGS": {
+    "LANGUAGE": "Language",
+    "LINK": "Settings"
+  },
+  "SIGNUP": {
+    "EMAIL": {
+      "PLACEHOLDER": "Email address",
+      "REQUIRED": "Email is required"
+    },
+    "FAILED": "Signup failed",
+    "LOGIN": "Login",
+    "PASSWORD": {
+      "PLACEHOLDER": "Password",
+      "REQUIRED": "You need to choose a password"
+    },
+    "REMEMBER-ME": "Remember me",
+    "REPEAT-PASSWORD": {
+      "PLACEHOLDER": "Repeat Password"
+    },
+    "SUBMIT": "Sign up"
+  }
+}

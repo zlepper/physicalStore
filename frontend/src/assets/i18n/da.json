@@ -1,0 +1,96 @@
+{
+  "LISTS": {
+    "ADD_NEW": "Tilføj ny",
+    "CREATE": {
+      "CANCEL": "Annuller",
+      "CREATE": "Opret",
+      "NAME": {
+        "PLACEHOLDER": "Navn",
+        "REQUIRED": "Navn er påkrævet"
+      },
+      "TITLE": "Opret ny liste"
+    },
+    "DELETE": {
+      "BUTTON": "Slet",
+      "CANCEL": "Annuller",
+      "CONFIRM": {
+        "BUTTON": "Slet",
+        "TITLE": "Slet liste"
+      },
+      "DELETE_INFO": "Indtast navnet på listen '{{name}}', for at slette listen",
+      "NAME": "Liste navn",
+      "NAME-REQUIRED": "Navn er påkrævet",
+      "NAMES-NO-MATCH": "Indtastede navn stemmer ikke overens med listenavn"
+    },
+    "SEARCH": "Søg",
+    "SHARE": "Del"
+  },
+  "LOGIN": {
+    "EMAIL": {
+      "PLACEHOLDER": "Email addresse",
+      "REQUIRED": "Email addresse er påkrævet"
+    },
+    "INVALID-EMAIL-OR-PASSWORD": "Ugyldig email eller kodeord",
+    "LOGGING-IN": "Logger ind...",
+    "LOGIN": "Log ind",
+    "PASSWORD": {
+      "PLACEHOLDER": "Kodeord",
+      "REQUIRED": "Kodeord er påkrævet"
+    },
+    "REMEMBER-ME": "Husk mig",
+    "SIGNUP": "Opret bruger"
+  },
+  "LOGOUT": "Log ud",
+  "POSTS": {
+    "ATTACHED-FILES": "Vedhæftede filer",
+    "CANCEL-EDIT": "Annuller redigering",
+    "CREATE": {
+      "CREATE": "Opret",
+      "DESCRIPTION": "Brug dette panel til at oprette nye poster",
+      "NAME": {
+        "PLACEHOLDER": "Navn",
+        "REQUIRED": "Navn er påkrævet"
+      },
+      "RESET": "Nulstil",
+      "TITLE": "Opret ny post"
+    },
+    "DELETE": {
+      "BUTTON": "Slet",
+      "CANCEL": "Annuller",
+      "CONFIRM": "Bekræft sletning",
+      "CONFIRM-NAME": "Er du sikker på at du vil slette posten",
+      "CONSEQUENCE": "Når først posten er slettet, er der ingen måde at gendanne den på."
+    },
+    "EDIT": {
+      "BUTTON": "Rediger",
+      "NAME": {
+        "PLACEHOLDER": "Navn",
+        "REQUIRED": "Navn er påkrævet"
+      },
+      "RESET": "Nulstil ændringer",
+      "SAVE": "Gem ændringer"
+    },
+    "UPLOAD": "Træk filer her, eller klik for at uploade"
+  },
+  "SETTINGS": {
+    "LANGUAGE": "Sprog",
+    "LINK": "Indstillinger"
+  },
+  "SIGNUP": {
+    "EMAIL": {
+      "PLACEHOLDER": "Email addresse",
+      "REQUIRED": "Email addresse er påkrævet"
+    },
+    "FAILED": "Opret fejlede",
+    "LOGIN": "Log ind",
+    "PASSWORD": {
+      "PLACEHOLDER": "Kodeord",
+      "REQUIRED": "Der skal vælges et kodeord"
+    },
+    "REMEMBER-ME": "Husk mig",
+    "REPEAT-PASSWORD": {
+      "PLACEHOLDER": "Gentag kodeord"
+    },
+    "SUBMIT": "Opret bruger"
+  }
+}

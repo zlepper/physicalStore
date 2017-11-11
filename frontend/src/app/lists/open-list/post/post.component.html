@@ -8,7 +8,7 @@
 
   <ng-template #postContent>
     <div>
-      <h3>Attached files</h3>
+      <h3>{{'POSTS.ATTACHED-FILES'|translate}}</h3>
       <div fxLayout="row" fxLayoutWrap fxLayoutGap="1rem" fxLayoutAlign="space-between center" fxLayout.xs="column">
         <div *ngFor="let attachment of post.attachments" fxFlex.gt-xs="200px">
           <a [href]="'/api/lists/' + listId + '/posts/' + post.id + '/attachments/' + attachment.id + '/file'"
@@ -40,9 +40,12 @@
 
 
   <md-card-actions>
-    <button md-button color="warn" type="button" (click)="removePost()">Delete</button>
-    <button md-button color="primary" type="button" (click)="editPost()" *ngIf="!editingPost">Edit</button>
-    <button md-button type="button" (click)="cancelEdit()" *ngIf="editingPost">Cancel edit</button>
+    <button md-button color="warn" type="button" (click)="removePost()">{{'POSTS.DELETE.BUTTON'|translate}}</button>
+    <button md-button color="primary" type="button" (click)="editPost()" *ngIf="!editingPost">
+      {{'POSTS.EDIT.BUTTON'|translate}}
+    </button>
+    <button md-button type="button" (click)="cancelEdit()" *ngIf="editingPost">{{'POSTS.CANCEL-EDIT'|translate}}
+    </button>
   </md-card-actions>
 </md-card>
 

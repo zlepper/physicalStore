@@ -1,10 +1,10 @@
 <form name="editPostForm" (submit)="triggerSave()">
   <md-form-field>
     <input mdInput type="text" required [(ngModel)]="copy.name" #nameInputField="ngModel" name="name-input-field"
-           placeholder="Name" [value]="original.name">
-    <md-error *ngIf="nameInputField.hasError('required')">Name is required</md-error>
+           placeholder="{{'POSTS.EDIT.NAME.PLACEHOLDER'|translate}}" [value]="original.name">
+    <md-error *ngIf="nameInputField.hasError('required')">{{'POSTS.EDIT.NAME.REQUIRED'|translate}}</md-error>
   </md-form-field>
   <br>
-  <button md-button type="button" color="warn" (click)="reset()">Reset</button>
-  <button md-button type="submit" color="primary">Save</button>
+  <button md-button type="button" color="warn" (click)="reset()">{{'POSTS.EDIT.RESET'|translate}}</button>
+  <button md-button type="submit" color="primary">{{'POSTS.EDIT.SAVE'|translate}}</button>
 </form>

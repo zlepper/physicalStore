@@ -75,7 +75,7 @@ export class OpenListComponent implements OnInit {
       .switchMap(id => this.listsService.getList(id))
       .switchMap(list => this.dialog.open(ConfirmListDeleteComponent, {data: list}).afterClosed())
       .filter(result => !!result)
-      .switchMap(result => this.listsService.deleteList(result))
+      .switchMap(result => this.listsService.deleteList(<string>result))
       .subscribe(() => {
         this.router.navigate(['/lists']);
       });
@@ -90,5 +90,9 @@ export class OpenListComponent implements OnInit {
         uploadTasks: uploadTasks.filter(task => task.post.id == post.id),
       })))
       .subscribe(posts => this.posts.next(posts));
+  }
+
+  public openShareEditor() {
+
   }
 }

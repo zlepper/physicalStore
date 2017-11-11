@@ -1,16 +1,20 @@
 <div class="content">
   <app-create-new-post (newPost)="createNewPost($event)"></app-create-new-post>
   <md-card>
-    <md-card-content fxLayout="row">
+    <md-card-content fxLayout="row" fxLayout.xs="column">
       <form name="searchForm" *ngIf="(posts|async)?.length > 0">
-        <md-form-field>
+        <md-form-field fxFlex.xs="100">
           <input mdInput type="search" name="search-input" #searchInput [formControl]="searchField"
-                 placeholder="Search">
+                 placeholder="{{'LISTS.SEARCH'|translate}}" fxFlex="100">
         </md-form-field>
       </form>
       <span fxFlex></span>
-      <button md-button color="warn" (click)="deleteList()">Delete list</button>
-      <button md-button color="primary" (click)="openShareEditor()">Share list</button>
+      <div fxLayout="row">
+        <button md-button fxFlex.xs="50" color="warn" (click)="deleteList()">{{'LISTS.DELETE.BUTTON'|translate}}
+        </button>
+        <button md-button fxFlex.xs="50" color="primary" (click)="openShareEditor()">{{'LISTS.SHARE'|translate}}
+        </button>
+      </div>
     </md-card-content>
   </md-card>
 

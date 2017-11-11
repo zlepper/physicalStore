@@ -1,9 +1,9 @@
 <h1 md-dialog-title>Confirm post remove</h1>
 <md-dialog-content>
-  <p>Are you sure you want to delete the post: {{data.name}}?</p>
-  <p>Once it has been delete there is no way to recover it.</p>
+  <p>{{'POSTS.DELETE.CONFIRM-NAME'|translate}}: {{data.name}}?</p>
+  <p>{{'POSTS.DELETE.CONSEQUENCE'|translate}}</p>
 </md-dialog-content>
 <md-dialog-actions>
-  <button md-button color="primary" md-dialog-close="no">Don't delete</button>
-  <button md-button color="warn" md-dialog-close="yes">Delete</button>
+  <button md-button color="primary" md-dialog-close="no">{{'POSTS.DELETE.CANCEL'|translate}}</button>
+  <button md-button color="warn" md-dialog-close="yes">{{'POSTS.DELETE.CONFIRM'|translate}}</button>
 </md-dialog-actions>

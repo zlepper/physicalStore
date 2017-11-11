@@ -1,3 +1,4 @@
+import {HttpClient} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -10,10 +11,13 @@ import {
   MdIconModule,
   MdInputModule,
   MdProgressSpinnerModule,
+  MdSelectModule,
   MdToolbarModule,
 } from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import {AppComponent} from './app.component';
 import {routes} from './app.routing';
@@ -29,8 +33,14 @@ import {PostComponent} from './lists/open-list/post/post.component';
 import {UploadAreaComponent} from './lists/open-list/upload-area/upload-area.component';
 import {LoginComponent} from './login/login.component';
 import {ServicesModule} from './services/services.module';
+import {LanguageSelectorComponent} from './settings/language-selector/language-selector.component';
+import {SettingsComponent} from './settings/settings.component';
 import {RepeatValidator} from './sign-up/repeatValidator';
 import {SignUpComponent} from './sign-up/sign-up.component';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -48,6 +58,8 @@ import {SignUpComponent} from './sign-up/sign-up.component';
     RepeatValidator,
     ConfirmListDeleteComponent,
     ValueMatchValidator,
+    LanguageSelectorComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,11 +73,19 @@ import {SignUpComponent} from './sign-up/sign-up.component';
     MdDialogModule,
     MdExpansionModule,
     MdIconModule,
+    MdSelectModule,
     routes,
     BrowserAnimationsModule,
     ServicesModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

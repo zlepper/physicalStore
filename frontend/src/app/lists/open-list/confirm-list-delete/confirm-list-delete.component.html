@@ -1,16 +1,21 @@
-<h2 md-dialog-title>Confirm list deletion</h2>
+<h2 md-dialog-title>{{'LISTS.DELETE.CONFIRM.TITLE'|translate}}</h2>
 
 <md-dialog-content>
-  To delete the list, confirm by entering the name of the list '{{listName}}' here:
-  <form name="deleteForm" id="delete-form" (submit)="confirmDelete()">
+  {{'LISTS.DELETE.DELETE_INFO'|translate:data}}:
+  <form name="deleteForm" id="delete-form" (submit)="confirmDelete()" #deleteForm="ngForm">
     <md-form-field>
-      <input mdInput type="text" [(ngModel)]="confirmListName" valueMatch [match]="listName" placeholder="List name"
-             name="confirm-name-input">
+      <input mdInput type="text" [(ngModel)]="confirmListName" valueMatch required [match]="listName"
+             placeholder="{{'LISTS.DELETE.NAME'|translate}}"
+             name="confirm-name-input" #confirmNameInput="ngModel">
+      <md-error *ngIf="confirmNameInput.hasError('required')">{{'LISTS.DELETE.NAME-REQUIRED'|translate}}</md-error>
+      <md-error *ngIf="confirmNameInput.hasError('valueMatch')">{{'LISTS.DELETE.NAMES-NO-MATCH'|translate}}</md-error>
     </md-form-field>
   </form>
 </md-dialog-content>
 
 <md-dialog-actions>
-  <button md-button type="button" md-dialog-close>Cancel</button>
-  <button md-button type="submit" form="delete-form" color="warn">Confirm</button>
+  <button md-button type="button" md-dialog-close>{{'LISTS.DELETE.CANCEL'|translate}}</button>
+  <button md-button type="submit" form="delete-form" color="warn" [disabled]="deleteForm.form.invalid">
+    {{'LISTS.DELETE.CONFIRM.BUTTON'|translate}}
+  </button>
 </md-dialog-actions>
